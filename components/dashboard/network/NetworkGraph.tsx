@@ -22,8 +22,7 @@ import { IconCheck } from "../icons";
 const nodeTypes = { company: CompanyNode };
 
 export function NetworkGraph({ height = 620 }: { height?: number }) {
-  const { result, networkView, setNetworkView, selectedCompany, setSelectedCompany } =
-    useDashboard();
+  const { result, networkView, selectedCompany, setSelectedCompany } = useDashboard();
   const [selectedPayment, setSelectedPayment] = useState<SettlementPayment | null>(null);
 
   const companies = result.participatingCompanies;
@@ -94,21 +93,7 @@ export function NetworkGraph({ height = 620 }: { height?: number }) {
 
   return (
     <div className="relative">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-full border border-border-gold p-1">
-          {(["original", "optimized"] as const).map((v) => (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setNetworkView(v)}
-              className={`rounded-full px-4 py-1.5 text-xs font-medium capitalize transition-colors ${
-                networkView === v ? "bg-gold text-bg-primary" : "text-cream/70 hover:text-cream"
-              }`}
-            >
-              {v}
-            </button>
-          ))}
-        </div>
+      <div className="mb-4 flex items-center justify-end">
         <p className="text-xs text-muted">
           {payments.length} payment{payments.length === 1 ? "" : "s"} &middot; click a node or
           connection for details
