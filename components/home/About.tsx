@@ -32,8 +32,9 @@ export function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
+              whileHover={{ y: -3 }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
-              className="rounded-2xl border border-border-gold bg-bg-elevated/70 p-7"
+              className="rounded-2xl border border-border-gold bg-bg-elevated/70 p-7 transition-colors duration-200 hover:border-gold/45 hover:bg-bg-elevated"
             >
               <h3 className="font-serif text-2xl text-cream">{f.name}</h3>
               <p className="mt-1 text-xs uppercase tracking-widest2 text-gold-light">{f.role}</p>

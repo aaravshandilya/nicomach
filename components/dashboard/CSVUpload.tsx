@@ -13,11 +13,35 @@ export function CSVUpload() {
     useDashboard();
   const [fileName, setFileName] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  const [fileError, setFileError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const MAX_FILE_BYTES = 5 * 1024 * 1024;
+
   function handleFile(file: File) {
+    setFileError(null);
+
+    const looksLikeCSV = /\.csv$/i.test(file.name) || file.type === "text/csv" || file.type === "";
+    if (!looksLikeCSV) {
+      setFileError(`"${file.name}" doesn't look like a CSV file. Please upload a .csv file.`);
+      return;
+    }
+    if (file.size === 0) {
+      setFileError(`"${file.name}" is empty.`);
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      setFileError(
+        `"${file.name}" is ${(file.size / (1024 * 1024)).toFixed(1)}MB, which is over the ${
+          MAX_FILE_BYTES / (1024 * 1024)
+        }MB demo limit. Try a smaller export.`
+      );
+      return;
+    }
+
     setFileName(file.name);
     const reader = new FileReader();
+    reader.onerror = () => setFileError(`Couldn't read "${file.name}". Please try again.`);
     reader.onload = () => {
       const text = String(reader.result || "");
       const { invoices: parsed, errors } = parseInvoiceCSV(text);
@@ -48,7 +72,15 @@ export function CSVUpload() {
           >
             <IconDownload width={14} height={14} /> Template
           </Button>
-          <Button variant="secondary" size="sm" onClick={loadSampleData}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              setFileError(null);
+              setFileName(null);
+              loadSampleData();
+            }}
+          >
             Use sample data
           </Button>
         </div>
@@ -99,7 +131,21 @@ export function CSVUpload() {
       </div>
 
       <AnimatePresence>
-        {validationErrors.length > 0 && (
+        {fileError && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            role="alert"
+            className="mt-4 overflow-hidden rounded-xl border border-red-400/30 bg-red-400/5 p-4"
+          >
+            <p className="flex items-center gap-2 text-sm text-red-200">
+              <IconAlert width={16} height={16} />
+              {fileError}
+            </p>
+          </motion.div>
+        )}
+        {!fileError && validationErrors.length > 0 && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}

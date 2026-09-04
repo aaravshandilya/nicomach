@@ -46,8 +46,9 @@ export function WhyNicoMach() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
+              whileHover={{ y: -3 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="rounded-2xl border border-border-gold bg-bg-elevated/70 p-7"
+              className="rounded-2xl border border-border-gold bg-bg-elevated/70 p-7 transition-colors duration-200 hover:border-gold/45 hover:bg-bg-elevated"
             >
               <h3 className="font-serif text-xl text-gold-light">{card.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">{card.body}</p>
@@ -59,7 +60,10 @@ export function WhyNicoMach() {
           <p className="eyebrow mb-6 text-center">Where NicoMach fits</p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {COMPETITIVE.map((row) => (
-              <div key={row.label} className="rounded-xl border border-border-gold p-5">
+              <div
+                key={row.label}
+                className="rounded-xl border border-border-gold p-5 transition-colors duration-200 hover:border-gold/45 hover:bg-bg-elevated/40"
+              >
                 <p className="font-serif text-base text-cream">{row.label}</p>
                 <p className="mt-2 text-xs leading-relaxed text-muted">{row.body}</p>
               </div>

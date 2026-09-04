@@ -25,12 +25,26 @@ export const metadata: Metadata = {
       "A read-only B2B settlement analysis platform. NicoMach does not hold or transfer funds.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "NicoMach — Move less money. Unlock more liquidity.",
+    description:
+      "A read-only B2B settlement analysis platform. NicoMach does not hold or transfer funds.",
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport = {
+  themeColor: "#050705",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <div className="grain-overlay" />
         <AppShell>
           <Navigation />

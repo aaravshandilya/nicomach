@@ -7,6 +7,7 @@ import { TrustSecurity } from "@/components/home/TrustSecurity";
 import { MarketContext } from "@/components/home/MarketContext";
 import { WhyNicoMach } from "@/components/home/WhyNicoMach";
 import { About } from "@/components/home/About";
+import { FAQ } from "@/components/home/FAQ";
 import { CTASection } from "@/components/home/CTASection";
 
 export default function HomePage() {
@@ -21,6 +22,7 @@ export default function HomePage() {
       <MarketContext />
       <WhyNicoMach />
       <About />
+      <FAQ />
       <CTASection />
     </>
   );

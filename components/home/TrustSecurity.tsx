@@ -38,10 +38,11 @@ export function TrustSecurity() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
+              whileHover={{ y: -3 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="rounded-2xl border border-border-gold bg-bg-elevated/70 p-7"
+              className="group rounded-2xl border border-border-gold bg-bg-elevated/70 p-7 transition-colors duration-200 hover:border-gold/45 hover:bg-bg-elevated"
             >
-              <div className="mb-4 h-px w-10 bg-gold" />
+              <div className="mb-4 h-px w-10 bg-gold transition-all duration-300 group-hover:w-14" />
               <h3 className="font-serif text-xl text-cream">{p.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">{p.body}</p>
             </motion.div>
