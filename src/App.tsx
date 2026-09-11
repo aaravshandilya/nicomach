@@ -1,45 +1,49 @@
 import { useState } from "react";
-import { Nav } from "./components/Nav";
-import { Hero } from "./components/Hero";
-import { PanelMarket } from "./components/PanelMarket";
-import { PanelProblem } from "./components/PanelProblem";
-import { PanelExample } from "./components/PanelExample";
-import { PanelLedger } from "./components/PanelLedger";
-import { PanelResult } from "./components/PanelResult";
-import { PanelTrust } from "./components/PanelTrust";
-import { PanelPilot } from "./components/PanelPilot";
-import { Footer } from "./components/Footer";
-import { Brief } from "./components/Brief";
-import { Demo } from "./components/Demo";
-import { Legal } from "./components/Legal";
-import { CookieBar } from "./components/CookieBar";
+import { useChrome } from "@/hooks/useChrome";
+import { TopBar } from "@/components/chrome/TopBar";
+import { SectionIndex } from "@/components/chrome/SectionIndex";
+import { Hero } from "@/components/sections/Hero";
+import { Problem } from "@/components/sections/Problem";
+import { SimpleExample } from "@/components/sections/SimpleExample";
+import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Results } from "@/components/sections/Results";
+import { TrustSecurity } from "@/components/sections/TrustSecurity";
+import { MarketContext } from "@/components/sections/MarketContext";
+import { WhyNicoMach } from "@/components/sections/WhyNicoMach";
+import { About } from "@/components/sections/About";
+import { FAQ } from "@/components/sections/FAQ";
+import { Pilot } from "@/components/sections/Pilot";
+import { Footer } from "@/components/sections/Footer";
+import { Annihilation } from "@/components/Annihilation";
 
 export default function App() {
   const [demo, setDemo] = useState(false);
-  const [brief, setBrief] = useState(false);
-  const [legal, setLegal] = useState<"terms" | "privacy" | null>(null);
-
-  const openDemo = () => { setBrief(false); setDemo(true); };
-  const openBrief = () => { setDemo(false); setBrief(true); };
+  const chrome = useChrome();
+  const openDemo = () => setDemo(true);
 
   return (
     <>
-      <Nav onOpenDemo={openDemo} onBrief={openBrief} />
+      <TopBar ground={chrome.top} progress={chrome.progress} onOpenDemo={openDemo} />
+
       <main>
         <Hero onOpenDemo={openDemo} />
-        <PanelMarket />
-        <PanelProblem onBrief={openBrief} />
-        <PanelExample />
-        <PanelLedger onOpenDemo={openDemo} />
-        <PanelResult onOpenDemo={openDemo} />
-        <PanelTrust onBrief={openBrief} />
-        <PanelPilot />
+        <Problem />
+        <SimpleExample />
+        <HowItWorks />
+        <Results onOpenDemo={openDemo} />
+        <TrustSecurity />
+        <MarketContext />
+        <WhyNicoMach />
+        <About />
+        <FAQ />
+        <Pilot />
       </main>
-      <Footer onBrief={openBrief} onOpenDemo={openDemo} onLegal={setLegal} />
-      <CookieBar onPrivacy={() => setLegal("privacy")} />
-      {brief && <Brief onClose={() => setBrief(false)} onOpenDemo={openDemo} />}
-      {demo && <Demo onClose={() => setDemo(false)} />}
-      {legal && <Legal doc={legal} onClose={() => setLegal(null)} />}
+
+      <Footer onOpenDemo={openDemo} />
+
+      <SectionIndex ground={chrome.bottom} activeId={chrome.activeId} />
+
+      {demo && <Annihilation onClose={() => setDemo(false)} />}
     </>
   );
 }

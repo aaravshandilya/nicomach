@@ -1,85 +1,148 @@
 # NicoMach — marketing site
 
-A read-only settlement analysis platform. This repository holds the public
-site: React 18 + TypeScript + Vite + Tailwind, with the whole page compiled
-into one self-contained HTML file.
+The NicoMach marketing site: a single-page editorial build in React + Tailwind
+that compiles to one self-contained HTML file.
 
 ## Hosting on GitHub Pages
 
-There are two routes; **the first needs no build at all.**
+The build output is **one HTML file with everything inlined** — no JS bundle, no
+CSS file, no image requests. That matters here: a GitHub project site is served
+from `https://<user>.github.io/<repo>/`, and a conventional build deployed there
+requests its assets from the domain root and 404s. A file with no asset
+references can't have that problem, so it works at the apex domain, at a
+subpath, or opened straight off disk, with no `base` to configure.
 
-### 1. Serve the prebuilt file (simplest)
+Two ways to turn it on. Pick one.
 
-`docs/index.html` is the finished site — every byte of CSS, JavaScript and the
-typeface is inlined, so there are no asset paths to break.
+**A — GitHub Actions (recommended; rebuilds on every push)**
 
-1. Push this repository to GitHub.
-2. **Settings → Pages → Source: Deploy from a branch**, branch `main`, folder
-   `/docs`.
+`.github/workflows/deploy.yml` is already here. After pushing:
+Settings → Pages → Source → **GitHub Actions**. That's the whole setup. Every
+push to `main` rebuilds and redeploys.
 
-It works at `you.github.io` and at `you.github.io/repo/` without any change,
-because the file references nothing outside itself. `docs/.nojekyll` is there
-so Pages serves it verbatim.
+**B — Branch deploy (no build, no Actions minutes)**
 
-### 2. Build with Actions
+`docs/index.html` is the prebuilt site, committed. After pushing:
+Settings → Pages → Source → **Deploy from a branch** → `main` / **`/docs`**.
 
-`.github/workflows/deploy.yml` runs `npm run build` and publishes `dist/`.
-Set **Settings → Pages → Source: GitHub Actions**. `VITE_BASE` is passed as
-`/<repo-name>/` so a project-page sub-path resolves correctly.
-
-## Local development
-
-```bash
-npm install
-npm run dev            # http://localhost:5173
-npm run build          # dist/
-bash ../scripts/bundle-artifact.sh   # rebuilds bundle.html, the single file
-```
-
-After rebuilding, copy the single file into place:
+If you take route B, remember `docs/` is a build output — regenerate it after
+changing anything in `src/`:
 
 ```bash
-cp bundle.html docs/index.html
+pnpm build:single && cp dist-single/index.html docs/index.html
 ```
 
-## Layout
+A `.nojekyll` file sits in both output folders so Pages skips Jekyll processing.
+
+**Custom domain** — add a `CNAME` file containing your domain to `dist-single/`
+(route A: add a step to the workflow) or to `docs/` (route B), then point the DNS
+at GitHub.
+
+## Run it locally
+
+```bash
+pnpm install     # or npm install
+pnpm dev         # http://localhost:5173
+```
+
+## Build
+
+```bash
+pnpm build:single   # -> dist-single/index.html   one self-contained file (what Pages serves)
+pnpm build          # -> dist/                    conventional Vite build, split assets
+```
+
+If you deploy the conventional `dist/` build to a project page instead, set the
+base path or the assets will 404:
+
+```bash
+VITE_BASE=/nicomach-site/ pnpm build
+```
+
+One build-tooling note: `pnpm build:single` runs Parcel and then `html-inline`.
+`html-inline` tries to resolve absolute URLs as local files and crashes on the
+Google Fonts `<link>`, so `scripts/build-single.mjs` strips the font tags into a
+temporary entry, bundles, and re-injects them into the finished file. It throws
+if the re-injection fails, so a silently font-less build can't ship.
+
+## Structure
 
 ```
+index.html                Vite entry (carries the font link + meta description)
+scripts/build-single.mjs  the single-file build
+docs/                     prebuilt site for branch-based Pages deploys
 src/
-  index.css              tokens, type scale, the .row / .fld / .tbl primitives
-  font.css               Figtree Variable, embedded as base64
-  App.tsx                section order
+  index.css               design tokens, ground system, type scale
+  App.tsx                 section order + demo overlay state
+  lib/sections.ts         the section index (drives the pinned footer nav)
+  hooks/
+    useChrome.ts          tracks which ground sits under the fixed chrome
+    useInView.ts          one-shot scroll reveal
+    useReducedMotionSafe.ts
   components/
-    Nav.tsx              fixed transparent bar that reads the ground beneath it
-    Ground.tsx           the hero surface — plane, wall, raking light
-    Hero.tsx  Market.tsx  Netting.tsx  Problem.tsx  Process.tsx
-    Console.tsx          the settlement ledger, with its loading state
-    Results.tsx  Security.tsx  Position.tsx  About.tsx  FAQ.tsx
-    Landscape.tsx  Pilot.tsx  Footer.tsx
-    Demo.tsx             the four-stage demonstration overlay
-    Legal.tsx            terms of use and privacy policy
-    CookieBar.tsx
-reference/
-  design-sources.md      what was measured off everyday.io, and the departures
-  demo-data.md           the arithmetic behind the demonstration ledger
-docs/
-  index.html             the built site, ready to serve
+    chrome/               TopBar, SectionIndex — the two pinned elements
+    marks/                Statue, WreathMark, GreekKeyRing, CrackRule,
+                          CrackFrame, VeinIcon
+    graphs/HeroNetwork.tsx  six-node obligation network
+    ui/                   ArrowLink, Figure (count-up), SectionHead
+    sections/             one file per numbered section
+    Annihilation.tsx      full-screen debt-annihilation demo
+docs/NicoMach-Visual-Redesign-Brief.md   the brief this was built against
 ```
 
-## Two things to do before this goes live
+## Design system
 
-- **The pilot form does not submit anywhere.** It validates and shows a
-  confirmation; nothing is transmitted. Wire it to a form endpoint (Formspree,
-  Basin, a Worker, your own API) before you publish.
-- **The terms and privacy policy are written in plain language and have not
-  been reviewed by counsel.** They describe accurately what the site does and
-  does not do, but have a lawyer read them before commercial launch.
+**Grounds.** The page runs on one inverting token set. A section declares
+`data-ground="ink | panel | cream | stone"`; `--bg`, `--fg`, `--dim`, `--rule`
+and `--accent` resolve from it, and the pinned chrome reads whichever ground sits
+under it and inverts to match. Adding a section means picking a ground — nothing
+else changes.
 
-## Content rules this build follows
+| token | hex | role |
+|---|---|---|
+| ink | `#050705` | base ground |
+| panel | `#0C110D` | alternating ground |
+| elevated | `#121912` | raised surfaces |
+| gold | `#C4A052` | rules, accents |
+| gold.light | `#DEC177` | accent on dark grounds |
+| gold.deep | `#8A6B22` | accent on light grounds (contrast) |
+| cream | `#F4EBD8` | text on dark / light breakout ground |
+| fog | `#A8A696` | secondary text |
+| marble | `#DFC493` | stone ground, statue highlight |
+| marble.dark | `#B99A5E` | statue shading |
+| pouch | `#8B6B3E` | the coin pouch |
+| success | `#798C68` | positive deltas |
+| olive | `#3F4A35` | CTA wash |
 
-No invented metrics, customer names, logos, quotes, testimonials or
-certifications. The €1.84T figure is attributed to PwC and carries its scope
-caveat. Every illustrative figure is labelled illustrative. The disclaimers —
-"Read-only analysis. No custody of funds. Every settlement requires approval.",
-"Illustrative example based on synthetic data, not a guaranteed outcome.", and
-the early-stage footer notice — appear verbatim.
+**Type.** Archivo for the big wordmark only — set with SVG `textLength`, so it
+spans the measure exactly whether or not the font loads. Cormorant Garamond for
+statements, Inter 300 at a 13px base for everything else.
+
+**Rules, not boxes.** No cards, rounded corners, shadows or gradients anywhere.
+Hierarchy is hairline rules, ledger rows, grid alignment and whitespace. The
+crack-glow treatment appears on every section-transition rule plus exactly three
+framed elements: the hero metric readout, the About entries, and the pilot form.
+
+## Content rules baked into this build
+
+Every figure is one of the real, already-labeled numbers (the €1.84T PwC
+estimate; 14 → 4 payments; 10 removed; 81% / −71%). No invented stats, client
+logos, testimonials or certification badges. Every standing disclaimer is carried
+verbatim and set at eyebrow weight rather than shrunk.
+
+Card body copy for The Problem, Why NicoMach and Trust & Security was not in the
+brief's appendix — only the titles were — so those one-liners were written from
+language already used elsewhere on the site, mostly the FAQ answers. Worth
+diffing against production copy.
+
+The contact form is client-side only; submitting sets a thank-you state and sends
+nothing. Wire it to an endpoint in `src/components/sections/Pilot.tsx`.
+
+## Push it
+
+This folder is already a git repository with history.
+
+```bash
+git remote add origin git@github.com:<you>/nicomach-site.git
+git push -u origin main
+```
