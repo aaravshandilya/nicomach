@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger Analysis — NicoMach</title>
+<meta name="description" content="A detailed synthetic ledger example: fourteen invoices, five participants, and a four-payment settlement recommendation with full audit trail and reconciliation checks.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-style='italic' font-size='19' text-anchor='middle' fill='%23C2A45D'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="mobile-bar">
+  <span class="word">NicoMach</span>
+  <button type="button">Menu</button>
+</div>
+<div class="mobile-scrim"></div>
+<div class="mobile-panel" id="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <button class="mobile-panel__close" type="button" aria-label="Close menu">✕</button>
+  <nav aria-label="Primary">
+    <a href="index.html"><span class="num">—</span>Home</a>
+    <a href="brief.html"><span class="num">I.</span>The Brief</a>
+    <a href="demo.html"><span class="num">II.</span>The Demonstration</a>
+    <a href="ledger-analysis.html"><span class="num">III.</span>Ledger Analysis</a>
+    <a href="about.html"><span class="num">IV.</span>About</a>
+    <a href="pilot-request.html"><span class="num">V.</span>Request a Pilot</a>
+  </nav>
+  <div class="mobile-panel__foot">
+    Phoenix, Arizona<br>
+    <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <button class="sidebar__toggle" type="button" aria-label="Collapse sidebar">«</button>
+    <div class="sidebar__brand">
+      <span class="mark">N</span>
+      <span class="word">NicoMach</span>
+    </div>
+    <p class="sidebar__tagline">Read-only settlement analysis for obligations between independent businesses.</p>
+    <nav class="sidebar__nav" aria-label="Primary">
+      <a href="index.html"><span class="num">—</span><span class="nav-label">Home</span></a>
+      <a href="brief.html"><span class="num">I.</span><span class="nav-label">The Brief</span></a>
+      <a href="demo.html"><span class="num">II.</span><span class="nav-label">The Demonstration</span></a>
+      <a href="ledger-analysis.html"><span class="num">III.</span><span class="nav-label">Ledger Analysis</span></a>
+      <a href="about.html"><span class="num">IV.</span><span class="nav-label">About</span></a>
+      <a href="pilot-request.html"><span class="num">V.</span><span class="nav-label">Request a Pilot</span></a>
+    </nav>
+    <div class="sidebar__foot">
+      Phoenix, Arizona<br>
+      <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="meander"></div>
+
+    <header class="page-hero">
+      <div class="eyebrow"><span class="sec-num">III.</span> Ledger Analysis</div>
+      <h1 style="max-width:22ch;">One settlement batch, examined in full.</h1>
+      <p class="lede">Fourteen submitted invoices, five participants, two exclusions, and a four-payment recommendation. Demonstration data — NicoMach does not move funds.</p>
+    </header>
+
+    <section class="wrap" style="padding-top:0;">
+      <div class="eyebrow"><span class="numeral">§</span> Summary metrics</div>
+      <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat"><div class="stat__label">Total eligible obligation value</div><div class="stat__value small tabular">$92,100.00</div></div>
+        <div class="stat"><div class="stat__label">Number of invoices</div><div class="stat__value">14</div></div>
+        <div class="stat"><div class="stat__label">Number of participants</div><div class="stat__value">5</div></div>
+        <div class="stat"><div class="stat__label">Original payment count</div><div class="stat__value">12</div></div>
+        <div class="stat"><div class="stat__label">Optimized payment count</div><div class="stat__value">4</div></div>
+        <div class="stat"><div class="stat__label">Original gross movement</div><div class="stat__value small tabular">$92,100.00</div></div>
+        <div class="stat"><div class="stat__label">Optimized gross movement</div><div class="stat__value small tabular">$16,300.00</div></div>
+        <div class="stat"><div class="stat__label">Percentage reduction</div><div class="stat__value">82.3%</div></div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="eyebrow"><span class="numeral">§</span> Invoice ledger</div>
+      <div class="table-wrap">
+        <table class="ledger">
+          <thead>
+            <tr>
+              <th>Invoice ID</th><th>Payer</th><th>Recipient</th><th class="num">Amount</th><th>Currency</th>
+              <th>Due date</th><th>Verification</th><th>Eligibility</th><th>Batch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="id">NM-40187</td><td>Sonoran Precision Components</td><td>Mesa Industrial Coatings</td><td class="num">$900.00</td><td>USD</td><td>2026-10-05</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40188</td><td>Mesa Industrial Coatings</td><td>Copper State Assembly</td><td class="num">$26,400.00</td><td>USD</td><td>2026-10-09</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40189</td><td>Copper State Assembly</td><td>Sonoran Precision Components</td><td class="num">$6,400.00</td><td>USD</td><td>2026-10-11</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40190</td><td>Desert Ridge Fabrication</td><td>Salt River Logistics</td><td class="num">$21,400.00</td><td>USD</td><td>2026-10-12</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40191</td><td>Salt River Logistics</td><td>Mesa Industrial Coatings</td><td class="num">$16,600.00</td><td>USD</td><td>2026-10-14</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40192</td><td>Mesa Industrial Coatings</td><td>Desert Ridge Fabrication</td><td class="num">$800.00</td><td>USD</td><td>2026-10-15</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40193</td><td>Copper State Assembly</td><td>Desert Ridge Fabrication</td><td class="num">$15,600.00</td><td>USD</td><td>2026-10-16</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40194</td><td>Salt River Logistics</td><td>Sonoran Precision Components</td><td class="num">$800.00</td><td>USD</td><td>2026-10-18</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40195</td><td>Desert Ridge Fabrication</td><td>Copper State Assembly</td><td class="num">$800.00</td><td>USD</td><td>2026-10-19</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40196</td><td>Sonoran Precision Components</td><td>Salt River Logistics</td><td class="num">$800.00</td><td>USD</td><td>2026-10-20</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40197</td><td>Mesa Industrial Coatings</td><td>Sonoran Precision Components</td><td class="num">$800.00</td><td>USD</td><td>2026-10-21</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40198</td><td>Desert Ridge Fabrication</td><td>Mesa Industrial Coatings</td><td class="num">$800.00</td><td>USD</td><td>2026-10-22</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--gold">Eligible</span></td><td>NM-2026-09</td></tr>
+            <tr><td class="id">NM-40199</td><td>Copper State Assembly</td><td>Salt River Logistics</td><td class="num">$4,100.00</td><td>USD</td><td>2026-10-13</td><td><span class="badge badge--verified">Verified</span></td><td><span class="badge badge--excluded">Excluded — disputed</span></td><td>—</td></tr>
+            <tr><td class="id">NM-40200</td><td>Sonoran Precision Components</td><td>Desert Ridge Fabrication</td><td class="num">$2,650.00</td><td>USD</td><td>2026-10-17</td><td><span class="badge badge--pending">Unverified</span></td><td><span class="badge badge--excluded">Excluded — restricted</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="eyebrow"><span class="numeral">§</span> Recommended settlement</div>
+      <div class="table-wrap">
+        <table class="ledger">
+          <thead>
+            <tr><th>Net payer</th><th>Net receiver</th><th class="num">Recommended payment</th><th>Contributing invoices</th><th>Approval status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mesa Industrial Coatings</td><td>Sonoran Precision Components</td><td class="num">$6,300.00</td><td>NM-40187, 40189, 40191, 40197</td><td><span class="badge badge--pending">Pending approval</span></td></tr>
+            <tr><td>Mesa Industrial Coatings</td><td>Copper State Assembly</td><td class="num">$3,400.00</td><td>NM-40188, 40192, 40193, 40195</td><td><span class="badge badge--pending">Pending approval</span></td></tr>
+            <tr><td>Desert Ridge Fabrication</td><td>Copper State Assembly</td><td class="num">$1,800.00</td><td>NM-40190, 40193, 40195, 40198</td><td><span class="badge badge--pending">Pending approval</span></td></tr>
+            <tr><td>Desert Ridge Fabrication</td><td>Salt River Logistics</td><td class="num">$4,800.00</td><td>NM-40190, 40191, 40194, 40196</td><td><span class="badge badge--pending">Pending approval</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--gray-muted);">Illustrative synthetic dataset. Not a customer result or guaranteed outcome.</p>
+    </section>
+
+    <section class="wrap">
+      <div class="split">
+        <div>
+          <div class="eyebrow"><span class="numeral">§</span> Audit trail</div>
+          <ol class="audit-log">
+            <li><time>09:14:02</time><span class="evt">Dataset loaded — 14 invoices submitted, $98,850.00 total face value</span></li>
+            <li><time>09:14:03</time><span class="evt">Duplicate check passed — 0 duplicates found</span></li>
+            <li><time>09:14:05</time><span class="evt">Eligibility rules applied — two invoices excluded (NM-40199, NM-40200)</span></li>
+            <li><time>09:14:06</time><span class="evt">Net positions calculated — sum verified at $0.00 across 5 participants</span></li>
+            <li><time>09:14:09</time><span class="evt">Optimization completed — 12 obligations reduced to 4 recommended payments</span></li>
+            <li><time>09:14:10</time><span class="evt">Reconciliation passed — optimized positions match original eligible positions</span></li>
+            <li><time>09:14:11</time><span class="evt">Recommendation generated — evidence package ready for review</span></li>
+          </ol>
+        </div>
+        <div>
+          <div class="eyebrow"><span class="numeral">§</span> Reconciliation checks</div>
+          <ul class="recon">
+            <li><span class="mark">✓</span> Net positions sum to zero</li>
+            <li><span class="mark">✓</span> Every optimized position matches the original eligible position</li>
+            <li><span class="mark">✓</span> Only verified and eligible invoices were used</li>
+            <li><span class="mark">✓</span> Currency groups were processed separately</li>
+            <li><span class="mark">✓</span> No duplicate invoices were included</li>
+            <li><span class="mark">✓</span> Every recommendation traces back to source invoices</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>© 2026 NicoMach. Early-stage analytical platform. Not a bank, lender, or money transmitter.</p>
+        <p><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></p>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script src="assets/nav.js"></script>
+</body>
+</html>
