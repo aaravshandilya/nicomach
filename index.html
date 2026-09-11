@@ -1,14 +1,118 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23CFBA92'/%3E%3Ctext x='16' y='23' font-family='Helvetica,Arial' font-size='20' font-weight='600' text-anchor='middle' fill='%231B1916'%3EN%3C/text%3E%3C/svg%3E" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NicoMach — Move less money. Unlock more liquidity.</title>
-    <meta name="description" content="NicoMach is a read-only settlement analysis platform. It analyses verified obligations between independent businesses and returns a smaller settlement plan — fewer payments, less gross cash movement, and a record of which obligations each transfer closes." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NicoMach — Move less money. Unlock more liquidity.</title>
+<meta name="description" content="NicoMach is a read-only settlement analysis platform. It analyses verified obligations between independent businesses and returns a smaller settlement plan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231D2C48'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' text-anchor='middle' fill='%23C7A24B'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="mobile-bar">
+  <span class="word">NicoMach</span>
+  <button type="button">Menu</button>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <button class="sidebar__toggle" type="button" aria-label="Collapse sidebar">«</button>
+    <div class="sidebar__brand">
+      <span class="mark">N</span>
+      <span class="word">NicoMach</span>
+    </div>
+    <p class="sidebar__tagline">Read-only settlement analysis for obligations between independent businesses.</p>
+    <nav class="sidebar__nav" aria-label="Primary">
+      <a href="index.html" class="is-active"><span class="num">—</span><span class="nav-label">Home</span></a>
+      <a href="brief.html"><span class="num">I.</span><span class="nav-label">The Brief</span></a>
+      <a href="demo.html"><span class="num">II.</span><span class="nav-label">The Demonstration</span></a>
+      <a href="ledger-analysis.html"><span class="num">III.</span><span class="nav-label">Ledger Analysis</span></a>
+      <a href="about.html"><span class="num">IV.</span><span class="nav-label">About</span></a>
+      <a href="pilot-request.html"><span class="num">V.</span><span class="nav-label">Request a Pilot</span></a>
+    </nav>
+    <div class="sidebar__foot">
+      Phoenix, Arizona<br>
+      <a href="terms.html" style="color:#C9BFA0">Terms</a> · <a href="privacy.html" style="color:#C9BFA0">Privacy</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="meander"></div>
+
+    <header class="page-hero" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Read-only analysis · No custody of funds · Every settlement requires approval</div>
+      <h1 style="max-width:16ch; margin:0 auto;">Move less money.<br>Unlock more liquidity.</h1>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Settlement analysis for obligations between independent businesses.</p>
+      <div style="margin-top:34px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn" href="demo.html">Open the demonstration</a>
+        <a class="btn btn--line" href="pilot-request.html">Request a pilot</a>
+      </div>
+    </header>
+
+    <div class="column-rule"></div>
+
+    <section class="wrap">
+      <div class="eyebrow"><span class="numeral">§</span> Market context — PwC estimate</div>
+      <div class="mega">€1.84T</div>
+      <p class="lede" style="margin-top:.4em;">of excess working capital could potentially be released globally.</p>
+      <p style="color:var(--ink-dim); max-width:56ch;">Covers inventory, receivables and payables. NicoMach addresses the settlement portion.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section class="wrap">
+      <p class="eyebrow">The problem</p>
+      <h2 class="section-title">Businesses optimise everything except the obligations between them.</h2>
+      <p style="color:var(--ink-dim); max-width:56ch; margin-top:1em;">Invoices are paid one at a time. Nobody sees what the network owes itself.</p>
+      <a href="brief.html" style="display:inline-block; margin-top:1em;">Read the full brief →</a>
+    </section>
+
+    <hr class="rule">
+
+    <section class="wrap">
+      <p class="eyebrow">A worked example</p>
+      <h2 class="section-title">Three obligations. Nothing owed.</h2>
+      <p style="color:var(--ink-dim); max-width:56ch; margin-top:1em;">Each company owes the next twenty dollars. Sixty moves. Everyone ends where they started.</p>
+      <a class="btn btn--imperial" href="demo.html" style="margin-top:1em;">Run the optimisation</a>
+    </section>
+
+    <hr class="rule">
+
+    <section class="wrap">
+      <p class="eyebrow">The result</p>
+      <div class="mega" style="font-size:clamp(2.4rem,6vw,4.2rem);">14<span class="arrow">→</span>4</div>
+      <p style="color:var(--ink-dim);">Payments — one October settlement cycle</p>
+      <p class="lede" style="margin-top:.6em;">$92,100 of obligations discharged by $16,420 actually moving.</p>
+      <p class="disclaimer">Illustrative example based on synthetic data, not a guaranteed outcome.</p>
+      <a href="ledger-analysis.html">See the full ledger analysis →</a>
+    </section>
+
+    <footer style="background:var(--imperial-deep); color:var(--papyrus); margin-top:40px;">
+      <div class="meander meander--light"></div>
+      <div class="wrap" style="display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between;">
+        <div>
+          <p style="font-family:'Playfair Display',serif; font-size:20px; color:#F7F1E1;">NicoMach</p>
+          <p style="max-width:34ch; color:#C9BFA0; font-size:14.5px;">Read-only settlement analysis for verified obligations between independent businesses.</p>
+          <p style="color:#a99f83; font-size:13px;">Phoenix, Arizona</p>
+        </div>
+        <div style="font-size:14.5px;">
+          <p style="font-style:italic; color:var(--gold-bright);">Read</p>
+          <p><a href="brief.html" style="color:#E7DFC7;">The brief</a></p>
+          <p><a href="demo.html" style="color:#E7DFC7;">The demonstration</a></p>
+          <p><a href="ledger-analysis.html" style="color:#E7DFC7;">Ledger analysis</a></p>
+        </div>
+        <div style="font-size:14.5px;">
+          <p style="font-style:italic; color:var(--gold-bright);">Legal</p>
+          <p><a href="terms.html" style="color:#E7DFC7;">Terms of use</a></p>
+          <p><a href="privacy.html" style="color:#E7DFC7;">Privacy policy</a></p>
+        </div>
+      </div>
+      <p class="foot-note" style="color:#a99f83;">NicoMach is an early-stage analytical platform. It does not currently provide banking, lending, investment, custody or money-transmission services.</p>
+    </footer>
+  </main>
+</div>
+
+<script src="assets/nav.js"></script>
+</body>
 </html>
