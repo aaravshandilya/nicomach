@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Demonstration — NicoMach</title>
+<meta name="description" content="An interactive settlement demonstration using a synthetic three-company scenario: Sonoran Precision Components, Mesa Industrial Coatings, and Copper State Assembly.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-style='italic' font-size='19' text-anchor='middle' fill='%23C2A45D'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="mobile-bar">
+  <span class="word">NicoMach</span>
+  <button type="button">Menu</button>
+</div>
+<div class="mobile-scrim"></div>
+<div class="mobile-panel" id="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <button class="mobile-panel__close" type="button" aria-label="Close menu">✕</button>
+  <nav aria-label="Primary">
+    <a href="index.html"><span class="num">—</span>Home</a>
+    <a href="brief.html"><span class="num">I.</span>The Brief</a>
+    <a href="demo.html"><span class="num">II.</span>The Demonstration</a>
+    <a href="ledger-analysis.html"><span class="num">III.</span>Ledger Analysis</a>
+    <a href="about.html"><span class="num">IV.</span>About</a>
+    <a href="pilot-request.html"><span class="num">V.</span>Request a Pilot</a>
+  </nav>
+  <div class="mobile-panel__foot">
+    Phoenix, Arizona<br>
+    <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="sidebar">
+    <button class="sidebar__toggle" type="button" aria-label="Collapse sidebar">«</button>
+    <div class="sidebar__brand">
+      <span class="mark">N</span>
+      <span class="word">NicoMach</span>
+    </div>
+    <p class="sidebar__tagline">Read-only settlement analysis for obligations between independent businesses.</p>
+    <nav class="sidebar__nav" aria-label="Primary">
+      <a href="index.html"><span class="num">—</span><span class="nav-label">Home</span></a>
+      <a href="brief.html"><span class="num">I.</span><span class="nav-label">The Brief</span></a>
+      <a href="demo.html"><span class="num">II.</span><span class="nav-label">The Demonstration</span></a>
+      <a href="ledger-analysis.html"><span class="num">III.</span><span class="nav-label">Ledger Analysis</span></a>
+      <a href="about.html"><span class="num">IV.</span><span class="nav-label">About</span></a>
+      <a href="pilot-request.html"><span class="num">V.</span><span class="nav-label">Request a Pilot</span></a>
+    </nav>
+    <div class="sidebar__foot">
+      Phoenix, Arizona<br>
+      <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="meander"></div>
+
+    <header class="page-hero">
+      <div class="eyebrow"><span class="sec-num">II.</span> The Demonstration</div>
+      <h1 style="max-width:22ch;">A synthetic settlement, run in the open.</h1>
+      <p class="lede">Three independent manufacturers, three verified invoices, one recommendation. This scenario uses illustrative synthetic data.</p>
+    </header>
+
+    <section class="wrap" id="demo-root" style="padding-top:0;">
+      <div class="demo-grid">
+
+        <div class="demo-col">
+          <div class="demo-col__title">Counterparty invoices</div>
+
+          <div class="inv-card" data-edge="spc-mic">
+            <div class="inv-card__top">
+              <span class="inv-card__id">SPC-1048</span>
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="inv-card__route">Sonoran Precision Components → Mesa Industrial Coatings</div>
+            <div class="inv-card__amount tabular">$18,400.00 · due Oct 14, 2026</div>
+            <div class="inv-card__meta"><span class="badge badge--pending badge--eligibility">Pending</span></div>
+            <button class="inv-card__why" type="button" aria-expanded="false">Why included?</button>
+            <div class="inv-card__detail">
+              <ul>
+                <li>Verified and approved by both participants</li>
+                <li>Same currency and settlement batch</li>
+                <li>Contributes to Mesa's net payer position</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inv-card" data-edge="mic-csa">
+            <div class="inv-card__top">
+              <span class="inv-card__id">MIC-7721</span>
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="inv-card__route">Mesa Industrial Coatings → Copper State Assembly</div>
+            <div class="inv-card__amount tabular">$26,150.00 · due Oct 18, 2026</div>
+            <div class="inv-card__meta"><span class="badge badge--pending badge--eligibility">Pending</span></div>
+            <button class="inv-card__why" type="button" aria-expanded="false">Why included?</button>
+            <div class="inv-card__detail">
+              <ul>
+                <li>Verified and approved by both participants</li>
+                <li>Same currency and settlement batch</li>
+                <li>Largest contributor to Mesa's net payer position</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inv-card" data-edge="csa-spc">
+            <div class="inv-card__top">
+              <span class="inv-card__id">CSA-2206</span>
+              <span class="badge badge--verified">Verified</span>
+            </div>
+            <div class="inv-card__route">Copper State Assembly → Sonoran Precision Components</div>
+            <div class="inv-card__amount tabular">$21,900.00 · due Oct 21, 2026</div>
+            <div class="inv-card__meta"><span class="badge badge--pending badge--eligibility">Pending</span></div>
+            <button class="inv-card__why" type="button" aria-expanded="false">Why included?</button>
+            <div class="inv-card__detail">
+              <ul>
+                <li>Verified and approved by both participants</li>
+                <li>Same currency and settlement batch</li>
+                <li>Contributes to Copper State's net receiver position</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card" style="padding:20px;">
+            <div class="demo-col__title" style="margin-bottom:10px;">Participant net positions</div>
+            <ul class="net-list">
+              <li><span class="name">Sonoran Precision Components</span><span class="amt receiver tabular">+$3,500.00</span></li>
+              <li><span class="name">Mesa Industrial Coatings</span><span class="amt payer tabular">−$7,750.00</span></li>
+              <li><span class="name">Copper State Assembly</span><span class="amt receiver tabular">+$4,250.00</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="demo-col">
+          <div class="demo-col__title">Payment network</div>
+          <div class="diagram-panel" data-view="original">
+            <div class="diagram-panel__label" id="dm-status" role="status" aria-live="polite">Original obligations · 3 payments</div>
+            <svg class="diagram" viewBox="0 0 360 260" role="img" aria-label="Interactive payment network between Sonoran Precision Components, Mesa Industrial Coatings, and Copper State Assembly">
+              <g class="edge-group edge-original" data-edge="spc-mic" data-start="180,40" data-end="320,225">
+                <path class="flow-path" d="M180,40 L320,225"></path>
+                <path class="flow-hit" d="M180,40 L320,225" tabindex="0" role="button" aria-label="Inspect invoice SPC-1048, Sonoran Precision Components to Mesa Industrial Coatings, $18,400"></path>
+                <g class="token" style="transform:translate(180px,40px)"><circle r="5" fill="#E0C779"></circle></g>
+              </g>
+              <g class="edge-group edge-original" data-edge="mic-csa" data-start="320,225" data-end="40,225">
+                <path class="flow-path" d="M320,225 L40,225"></path>
+                <path class="flow-hit" d="M320,225 L40,225" tabindex="0" role="button" aria-label="Inspect invoice MIC-7721, Mesa Industrial Coatings to Copper State Assembly, $26,150"></path>
+                <g class="token" style="transform:translate(320px,225px)"><circle r="5" fill="#E0C779"></circle></g>
+              </g>
+              <g class="edge-group edge-original" data-edge="csa-spc" data-start="40,225" data-end="180,40">
+                <path class="flow-path" d="M40,225 L180,40"></path>
+                <path class="flow-hit" d="M40,225 L180,40" tabindex="0" role="button" aria-label="Inspect invoice CSA-2206, Copper State Assembly to Sonoran Precision Components, $21,900"></path>
+                <g class="token" style="transform:translate(40px,225px)"><circle r="5" fill="#E0C779"></circle></g>
+              </g>
+
+              <g class="edge-group edge-optimized" data-edge="mic-spc-opt" data-start="320,225" data-end="180,40">
+                <path class="flow-path" d="M320,225 L180,40"></path>
+                <path class="flow-hit" d="M320,225 L180,40" tabindex="0" role="button" aria-label="Inspect recommended payment: Mesa Industrial Coatings to Sonoran Precision Components, $3,500"></path>
+                <g class="token" style="transform:translate(320px,225px)"><circle r="5" fill="#E0C779"></circle></g>
+              </g>
+              <g class="edge-group edge-optimized" data-edge="mic-csa-opt" data-start="320,225" data-end="40,225">
+                <path class="flow-path" d="M320,225 L40,225"></path>
+                <path class="flow-hit" d="M320,225 L40,225" tabindex="0" role="button" aria-label="Inspect recommended payment: Mesa Industrial Coatings to Copper State Assembly, $4,250"></path>
+                <g class="token" style="transform:translate(320px,225px)"><circle r="5" fill="#E0C779"></circle></g>
+              </g>
+
+              <g class="node"><circle class="node-circle" cx="180" cy="40" r="30"></circle><text class="node-label" x="180" y="37">SPC</text><text class="node-sub" x="180" y="50">Sonoran</text></g>
+              <g class="node"><circle class="node-circle" cx="320" cy="225" r="30"></circle><text class="node-label" x="320" y="222">MIC</text><text class="node-sub" x="320" y="235">Mesa</text></g>
+              <g class="node"><circle class="node-circle" cx="40" cy="225" r="30"></circle><text class="node-label" x="40" y="222">CSA</text><text class="node-sub" x="40" y="235">Copper State</text></g>
+            </svg>
+          </div>
+
+          <div class="demo-toolbar">
+            <div class="segmented" role="group" aria-label="Diagram view">
+              <button type="button" data-view="original" aria-pressed="true">Original</button>
+              <button type="button" data-view="optimized" aria-pressed="false">Optimized</button>
+            </div>
+          </div>
+          <div class="demo-toolbar">
+            <button class="btn" id="dm-run" type="button">Run the optimization</button>
+            <button class="btn btn--line" id="dm-reset" type="button" disabled>Reset</button>
+            <button class="btn btn--line" id="dm-view-audit" type="button">View the audit log</button>
+            <a class="btn btn--line" href="ledger-analysis.html">Open the full ledger analysis</a>
+          </div>
+        </div>
+
+        <div class="demo-col">
+          <div class="demo-col__title">Settlement summary</div>
+          <div class="card settlement-summary">
+            <div class="row"><dt>Original gross movement</dt><dd id="dm-gross-original" class="tabular">$66,450.00</dd></div>
+            <div class="row"><dt>Optimized gross movement</dt><dd id="dm-gross-optimized" class="hero-num tabular">$66,450.00</dd></div>
+            <div class="row"><dt>Payment count</dt><dd id="dm-payment-count" style="font-size:17px;">3 → 3</dd></div>
+            <div class="row"><dt>Gross reduction</dt><dd id="dm-reduction" style="font-size:17px;">0%</dd></div>
+            <div class="row"><dt>Approval status</dt><dd style="font-size:13px;"><span class="badge badge--pending" id="dm-approval">Not yet generated</span></dd></div>
+          </div>
+          <div class="card">
+            <div class="demo-col__title" style="margin-bottom:10px;">Audit log</div>
+            <ol class="audit-log" id="dm-audit" style="max-height:280px; overflow-y:auto;"></ol>
+          </div>
+          <p style="font-size:12px; color:var(--gray-muted);">Demonstration data. NicoMach does not move funds.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>© 2026 NicoMach. Early-stage analytical platform. Not a bank, lender, or money transmitter.</p>
+        <p><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></p>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script src="assets/nav.js"></script>
+<script src="assets/demo.js"></script>
+</body>
+</html>
