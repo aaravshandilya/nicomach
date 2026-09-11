@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   NicoMach — visual language measured from everyday.io.
+   H1 38.4px / w500 / ls -0.03em / lh 1.16 at a 947px viewport, body
+   16px / w400, a fixed 62px transparent nav whose items are spread at
+   wide intervals across the whole viewport, and tall single-ground
+   sections. The Everyday face itself is proprietary; Figtree stands in.
+   ------------------------------------------------------------------ */
+
+:root {
+  --paper:      #F5F1E9;
+  --paper-2:    #EDE7DB;
+  --ink:        #1B1916;
+  --dim:        #6B665C;
+  --rule:       rgba(27, 25, 22, 0.16);
+
+  --sand:       #CFBA92;
+  --slate:      #24211C;
+
+  --bg: var(--paper);
+  --fg: var(--ink);
+
+  --nav-h: 62px;
+  --pad: clamp(20px, 4vw, 60px);
+  --band-y: clamp(88px, 11vw, 172px);
+}
+
+[data-ground="paper"] { --bg: var(--paper);   --fg: var(--ink);      --dim: #6B665C; --rule: rgba(27,25,22,.16); }
+[data-ground="tone"]  { --bg: var(--paper-2); --fg: var(--ink);      --dim: #6B665C; --rule: rgba(27,25,22,.18); }
+[data-ground="sand"]  { --bg: var(--sand);    --fg: #221F1A;         --dim: #5B5040; --rule: rgba(34,31,26,.28); }
+[data-ground="dark"]  { --bg: var(--slate);   --fg: #EFE9DC;         --dim: #A09889; --rule: rgba(239,233,220,.19); }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Figtree, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+section, footer { background: var(--bg); color: var(--fg); }
+
+/* layout ----------------------------------------------------------- */
+.shell   { width: 100%; max-width: 1360px; margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+.band    { scroll-margin-top: var(--nav-h); }
+.band-y  { padding-top: var(--band-y); padding-bottom: var(--band-y); }
+.grid12  { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); column-gap: clamp(16px, 2.4vw, 38px); }
+
+/* type ------------------------------------------------------------- */
+.t-display { font-size: clamp(2.3rem, 4.6vw, 3.95rem); font-weight: 500; letter-spacing: -0.035em; line-height: 1.08; }
+.t-head    { font-size: clamp(1.85rem, 3.4vw, 3rem);  font-weight: 500; letter-spacing: -0.03em;  line-height: 1.13; }
+.t-sub     { font-size: clamp(1.15rem, 1.6vw, 1.4rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; }
+.t-lead    { font-size: clamp(1.09rem, 1.3vw, 1.3rem); font-weight: 400; letter-spacing: -0.01em; line-height: 1.5; }
+.t-body    { font-size: 16.5px; line-height: 1.58; letter-spacing: -0.004em; }
+.t-small   { font-size: 14.5px; line-height: 1.55; }
+.t-fine    { font-size: 13px;   line-height: 1.62; }
+.t-tag     { font-size: 12.5px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; }
+.t-num     { font-weight: 400; letter-spacing: -0.05em; line-height: 0.88; font-variant-numeric: tabular-nums lining-nums; }
+
+h1, h2, h3, h4, p, dl, dd, blockquote, figure { margin: 0; }
+ol, ul { list-style: none; margin: 0; padding: 0; }
+
+/* controls --------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 26px; border: 1px solid transparent; border-radius: 0; cursor: pointer;
+  font: inherit; font-size: 15.5px; font-weight: 500; letter-spacing: -0.012em;
+  background: var(--fg); color: var(--bg); text-decoration: none;
+}
+.btn:disabled { opacity: .38; cursor: default; }
+.btn:not(:disabled):hover { opacity: .85; }
+.btn--veil { background: rgba(30,26,20,.72); color: #F8F4EC; border-color: transparent; }
+.btn--veil:not(:disabled):hover { background: rgba(30,26,20,.86); opacity: 1; }
+.btn--line { background: transparent; color: var(--fg); border-color: var(--fg); }
+.btn--line:not(:disabled):hover { background: var(--fg); color: var(--bg); opacity: 1; }
+.btn--ghost { background: transparent; color: #FBF7EF; border-color: rgba(251,247,239,.6); }
+.btn--ghost:hover { background: rgba(251,247,239,.14); opacity: 1; }
+
+.plain { color: inherit; text-decoration: none; }
+.plain:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+
+/* the row — what replaces a line of three cards --------------------- */
+.row {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0,17rem) minmax(0,1fr);
+  column-gap: clamp(16px, 2.4vw, 42px);
+  align-items: baseline;
+  border-top: 1px solid var(--rule);
+  padding: 28px 0;
+}
+@media (max-width: 768px) {
+  .row { grid-template-columns: 2.6rem minmax(0,1fr); }
+  .row > :last-child { grid-column: 2 / -1; margin-top: 12px; }
+}
+
+/* form ------------------------------------------------------------- */
+.fld { border-bottom: 1px solid var(--rule); padding-top: 20px; }
+.fld > label { display: block; font-size: 12.5px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; color: var(--dim); }
+.fld input, .fld select, .fld textarea {
+  width: 100%; background: transparent; border: 0; outline: none; border-radius: 0; appearance: none;
+  color: var(--fg); font: inherit; font-size: 16.5px; padding: 9px 0 13px;
+}
+.fld textarea { resize: none; }
+.fld input::placeholder, .fld textarea::placeholder { color: var(--dim); opacity: .6; }
+.fld:focus-within { border-bottom-color: var(--fg); }
+.fld:focus-within > label { color: var(--fg); }
+.fld select option { background: #F5F1E9; color: #1B1916; }
+
+/* data ------------------------------------------------------------- */
+.tbl { width: 100%; border-collapse: collapse; text-align: left; }
+.tbl th, .tbl td { padding: 16px 20px 16px 0; vertical-align: top; }
+.tbl thead th { border-bottom: 1px solid var(--rule); padding-bottom: 11px; }
+.tbl tbody tr { border-bottom: 1px solid var(--rule); }
+
+/* the ledger's loading state --------------------------------------- */
+.sk { background: currentColor; opacity: .1; display: block; height: 10px; }
+.sk-pulse { animation: sk 1.3s ease-in-out infinite; }
+@keyframes sk { 0%, 100% { opacity: .07; } 50% { opacity: .16; } }
+
+/* the grain of the hero surface ------------------------------------ */
+.grain {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(88, 70, 40, 0.05) 0px,
+    rgba(88, 70, 40, 0.05) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .sk-pulse { animation: none; }
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* ------------------------------------------------------------------
+   Panels. The reference is a sequence of full-bleed frames, one idea
+   each — not a scrolling brochure. Every panel fills the viewport and
+   carries about thirty words. Everything dense lives in the brief.
+   ------------------------------------------------------------------ */
+.panel {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  scroll-margin-top: 0;
+}
+.panel-in {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 62px) var(--pad) clamp(40px, 7vh, 80px);
+}
+@media (max-height: 680px) {
+  .panel { min-height: 0; }
+  .panel-in { padding-top: calc(var(--nav-h) + 40px); padding-bottom: 64px; }
+}
+
+/* the one line of type a panel is built around */
+.t-panel {
+  font-size: clamp(2.1rem, 5.4vw, 4.6rem);
+  font-weight: 500;
+  letter-spacing: -0.038em;
+  line-height: 1.05;
+}
+.t-mega {
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.84;
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: clamp(4.5rem, 17vw, 15rem);
+}
+
+/* the eyebrow, pinned to the top of every panel */
+.panel-tag {
+  position: absolute;
+  top: calc(var(--nav-h) + 26px);
+  left: var(--pad);
+  right: var(--pad);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* the brief — the dense reading view the panels hand off to */
+.brief-row { border-top: 1px solid var(--rule); padding: clamp(26px,3.4vw,44px) 0; }
+
+/* the console's table: inset cells, and a compact variant for panels */
+.tbl--inset th, .tbl--inset td { padding-left: 20px; }
+.tbl--dense th, .tbl--dense td { padding-top: 9px; padding-bottom: 9px; font-size: 13.5px; line-height: 1.4; }
+.tbl--dense thead th { padding-bottom: 8px; font-size: 11.5px; }
